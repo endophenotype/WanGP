@@ -70,7 +70,7 @@ def system_browser() -> str | None:
     """A Chromium-family browser installed on the machine (Edge, Chrome or Chromium), so nothing has to be downloaded."""
     if sys.platform == "win32":
         bases = [os.environ.get(key) for key in ("PROGRAMFILES(X86)", "PROGRAMFILES", "LOCALAPPDATA")]
-        candidates = [Path(base) / relative for base in bases if base for relative in ("Microsoft/Edge/Application/msedge.exe", "Google/Chrome/Application/chrome.exe")]
+        candidates = [Path(base) / relative for relative in ("Google/Chrome/Application/chrome.exe", "Microsoft/Edge/Application/msedge.exe") for base in bases if base]
     elif sys.platform == "darwin":
         candidates = [Path(f"/Applications/{name}.app/Contents/MacOS/{name}") for name in ("Microsoft Edge", "Google Chrome", "Chromium")]
     else:
